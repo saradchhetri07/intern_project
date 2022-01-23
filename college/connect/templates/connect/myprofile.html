@@ -1,0 +1,93 @@
+{% extends 'connect/basic.html'%}
+{%block content%}
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="/connect/home/0">College Connect</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li>
+                <a type="button" href="/connect/createproject" class="btn btn-primary mr-3">+ create project</a>
+            </li>
+            <li>
+                <a href="/connect/createresearch" class="btn btn-primary" type="button">+ create research</a>
+            </li>
+        </ul>
+        <a href="/connect/myprofile" type="button" name="button" class="btn btn-primary mr-4">my profile</a>
+        <a href="/connect/logout" type="button" name="button" class="btn btn-primary">logout</a>
+    </div>
+</nav>
+<div class="container">
+
+    <h3 class="my-3">My Projects</h3>
+    <br>
+    <br>
+    {% if projects|length == 0 %}
+    <div class="alert alert-primary alert-dismissible fade show my-3">
+        <strong>There is no projects in your profile</strong>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% else %}
+
+    <div class="row">
+        {% for i in projects %}
+        <div class="col-md-3 mr-3 my-2">
+            <div class="card" style="width: 18rem;background-color: darkgray;">
+                <div class="card-body">
+                    <h5 class="card-title">{{i.pid.pname}}</h5>
+                    <a href="/connect/delete?pid={{i.pid.pid}}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    <div class="container">
+
+    <h3>My Research</h3>
+    <br>
+
+    {% if research == '' and researchs|length == 0 %}
+    <div class="alert alert-primary alert-dismissible fade show my-3">
+        <strong>There is no research in your profile</strong>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% else %}
+        {% if researchs|length != 0 %}
+       
+        <div class="row">
+            {% for i in researchs %}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;background-color: darkgray;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i.rid.rname}}</h5>
+                        <a href="/connect/delete?rid={{i.rid.rid}}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% else %}
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;background-color: darkgray;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{research.rname}}</h5>
+                        <a href="/connect/delete?rid={{research.rid}}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% endif %}
+    <br>
+    <br>
+</div>
+
+{% endblock %}

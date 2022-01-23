@@ -1,0 +1,174 @@
+{% extends 'connect/basic.html'%}
+{% block content%}
+  <!-- toggling navbar -->
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <a class="navbar-brand" href="/connect/home/0">College Connect</a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <div class="dropdown show">
+              <a class="btn btn-primary dropdown-toggle  mr-3" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filters
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="/connect/home/1" class="dropdown-item">Project</a>
+                <hr>
+                <a href="/connect/home/2" class="dropdown-item">Research</a>
+                <hr>
+                <a class="dropdown-item dropdown-toggle" id="dropdowntopic" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+                <div  class="dropdown-menu" aria-labelledby="dropdowntopic">
+                  {% for i in topics %}
+                   <a class="dropdown-item" href="/connect/home/{{num}}/{{i}}">{{i}}</a>
+                   {% endfor %}
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a type="button" href="/connect/createproject" class="btn btn-primary mr-3">+ create project</a>
+          </li>
+          <li>
+            <a href="/connect/createresearch" class="btn btn-primary" type="button">+ create research</a>
+          </li>
+        </ul>
+        <a href="/connect/myprofile" type="button" name="button" class="btn btn-primary mr-4">my profile</a>
+        <a href="/connect/logout" type="button" name="button" class="btn btn-primary">logout</a>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="row">
+      {% for i in projects%}
+      <div class="col-md-4">
+        
+        <div class="card my-5" style="width: 18rem;">
+          <img class="card-img-top" src="https://image.freepik.com/free-vector/light-blue-project-management-concept_23-2147782704.jpg"
+            alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><strong><i>{{i.pname}}</i></strong></h5>
+            <h4 class="card-title"><strong>{{i.pfield}}</strong></h4>
+            <p class="card-text">
+              <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModalproject{{forloop.counter}}">
+                Get Complete Details.
+              </button>
+            </p>
+          </div>
+        </div>
+        <!-- modal body -->
+        <div class="modal fade" id="exampleModalproject{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelproject{{forloop.counter}}"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabelproject{{forllop.counter}}">{{i.pname}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group container">
+                    <strong>Project Description:</strong>
+                    <p>{{i.projshortdesc}}</p>
+                    <hr>
+                    <strong>Field of Project:</strong>
+                    <p>{{i.pfield}}</p>
+                    <hr>
+                    <strong>Branch Restriction:</strong>
+                    {% if i.branch_restriction %}
+                    <p>Yes</p>
+                    {% else %}
+                    <p>No</p>
+                    {% endif %}
+                    <hr>
+                    <strong>Branch:</strong>
+                    <p>{{i.project_branch}}</p>
+                    <hr>
+                    <strong>Maximum Number of People:</strong>
+                    <p>{{i.number_of_people}}</p>
+                    <hr>
+                    <strong>Starting At:</strong>
+                    <p>{{i.starttime}}</p>
+                    <hr>
+                    <strong>Expected Time</strong>
+                    <p> {{i.time}} days</p>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% for i in researchs%}
+      <div class="col-md-4">
+        
+        <div class="card my-5" style="width: 18rem;">
+          <img class="card-img-top" src="https://pbs.twimg.com/profile_images/416470137861328896/Kch7r6Pt.jpeg"
+            alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><strong><i>{{i.rname}}</i></strong></h5>
+            <h4 class="card-title"><strong>{{i.rfield}}</strong></h4>
+            <p class="card-text">
+              <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModal{{forloop.counter}}">
+                Get Complete Details.
+              </button>
+            </p>
+          </div>
+        </div>
+        <!-- modal body -->
+        <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{forloop.counter}}"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel{{forllop.counter}}">{{i.pname}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group container">
+                    <strong>Research Description:</strong>
+                    <p>{{i.rescshortdesc}}</p>
+                    <hr>
+                    <strong>Field of Research:</strong>
+                    <p>{{i.rfield}}</p>
+                    <hr>
+                    <strong>Branch Restriction:</strong>
+                    {% if i.dept_restriction %}
+                    <p>Yes</p>
+                    {% else %}
+                    <p>No</p>
+                    {% endif %}
+                    <hr>
+                    <strong>Branch:</strong>
+                    <p>{{i.research_department}}</p>
+                    <hr>
+                    <strong>Maximum Number of People:</strong>
+                    <p>{{i.rnumber_of_people}}</p>
+                    <hr>
+                    <strong>Starting At:</strong>
+                    <p>{{i.research_start_time}}</p>
+                    <hr>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+{% endblock%}

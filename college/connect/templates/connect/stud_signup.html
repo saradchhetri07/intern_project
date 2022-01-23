@@ -1,0 +1,88 @@
+{% extends 'connect/basic.html'%}
+{% block content %}
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="/connect/signup">College Connect</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    
+        <a href="/connect/myprofile" type="button" name="button" class="btn btn-primary mr-4">Sign up</a>
+        <a href="/connect/login" type="button" name="button" class="btn btn-primary">Log in</a>
+    </div>
+</nav>
+    <div class="container my-5">
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="sname">
+                    Name
+                </label>
+                {{forms.sname}}
+            </div>
+            <div class="form-group">
+                <label for="usn">
+                    University Serial Number
+                </label>
+                {{forms.usn}}
+            </div>
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label> 
+                {{forms.password}}
+            </div>
+            <div class="form-group">
+                <label for="email">
+                    Email
+                </label>
+                {{forms.email}}
+            </div>
+            <div class="form-group">
+                <label for="email">
+                    Semester
+                </label>
+                {{forms.sem}}
+            </div>
+            <div class="form-group">
+                <label for="contact">
+                    Contact
+                </label>
+                {{forms.contact}}
+            </div>
+            <div class="form-group">
+                <label for="sdept">
+                    Department
+                </label>
+                {{forms.sdept}}
+            </div>
+            
+            <button class="btn btn-primary" type="submit">SignUp</button>
+        </form>
+    </div>
+ 
+{% endblock %}
+
+
+<!-- 
+<div class="form-group">
+    <input type="text" placeholder="Name" class="form-control" required>
+</div>
+<div class="form-group">
+    <input type="email" placeholder="Email" class="form-control" required>
+</div>
+<div class="form-group">
+    <input type="password" placeholder="Password" class="form-control" required>
+</div>
+<div class="form-group">
+    <input type="text" placeholder="Contact" class="form-control" required>
+</div>
+<div class="form-group">
+    <input type="text" placeholder="University Serial Number" class="form-control" required>
+</div>
+<div class="form-group">
+    <input type="text" placeholder="Department Name" class="form-control" required>
+</div>
+<div class="form-group">
+    <button class="btn btn-primary">Submit</button>
+</div> -->
